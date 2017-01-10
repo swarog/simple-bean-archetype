@@ -26,24 +26,27 @@
   <build>
     <plugins>
         <plugin>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <configuration>
-                <archive>
-                    <manifest>
-                        <mainClass>com.apress.prospring4.ch4.App</mainClass>
-                    </manifest>
-                </archive>
-                <descriptorRefs>
-                    <descriptorRef>jar-with-dependencies</descriptorRef>
-                </descriptorRefs>
-            </configuration>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
             <executions>
                 <execution>
-                    <id>make-assembly</id> <!-- this is used for inheritance merges -->
-                    <phase>install</phase> <!-- bind to the packaging phase -->
+                    <phase>install</phase>
                     <goals>
-                        <goal>single</goal>
+                        <goal>shade</goal>
                     </goals>
+                    <configuration>
+                        <transformers>
+                            <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                <resource>META-INF/spring.handlers</resource>
+                            </transformer>
+                            <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                <resource>META-INF/spring.schemas</resource>
+                            </transformer>
+                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <mainClass>com.apress.prospring4.ch4.SimpleBean</mainClass>
+                            </transformer>
+                        </transformers>
+                    </configuration>
                 </execution>
             </executions>
         </plugin>
