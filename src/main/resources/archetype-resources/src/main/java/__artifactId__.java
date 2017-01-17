@@ -9,7 +9,7 @@ import org.springframework.context.support.GenericXmlApplicationContext;
  * Spring hello world!
  *
  */
-public class App 
+public class ${artifactId}
 {
     public static void main( String[] args )
     {
